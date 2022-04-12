@@ -92,4 +92,35 @@
 
 
 5. 회원 도메인
-    1) 
+
+    1) Model
+		- 릴레이션 id, 이름, 유저id, 유저 패스워드와 회원 세부 정보 객체를 가짐
+		- 세부 정보 attribute는 수정이 자주 일어날 것이라 생각해 분리
+		```json
+		'user': {
+			'id': 1,
+			'name': 'ㅇㅇ',
+			'userId': 'qweqwe1',
+			'userPw': 'qwezxc123',
+			'userDetail': {
+				'address': 서울시 마포구',
+				'email': '42.4.youngpar@gmail.com'
+			}
+		}
+		```
+
+	1) ORM
+		- SQLP 겸사겸사 공부하기 위해서 회원 도메인에서는 MyBatis 사용 예정
+		- DBMS는 MySQL과 유사한 MariaDB 사용
+
+	1) Test
+		- 회원 가입 정상 동작여부 테스트 코드 작성, 중복 등 추가 케이스 작성 필요
+		- @SpringBootTest 어노테이션으로 DI 컨테이너를 이용한 테스트 가능(@Autowired)
+
+	1) Architect
+		- Controller -> Service -> Repository -> DB의 계층형 구조로 작성
+		- 계층형 구조는 시스템을 유사 관심사를 가진 레이어로 분해
+		- 모든 레이어는 하위 레이어에만 의존, 직관적이고 러닝 커브가 완만함
+		- 적절한 수준의 코드 품질, 확장성 등이 장점
+		- 모든 레이어가 하위 레이어에 의존 -> 하위 객체가 상위 객체에 의존해야하는 DIP 위반
+			-> 프로젝트 규모가 커지고 복잡해졌을 때, 수정이 쉽지 않을 수 있음.
