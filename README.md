@@ -6,17 +6,19 @@ B/E 포폴 만들기 천천히 탑다운
 1. 프로젝트 생성	✅
     - Spring Initializer
         - Web, JPA, H2, Actuator
-		-> ( For ) Request Bind, Persist, Health Check
+        -> ( For ) Request Bind, Persist, Health Check
 
-		- 서버 구동 후, http://localhost:8080/actuator/health 에서 서버 구동상태 응답 가능
+        - 서버 구동 후, http://localhost:8080/actuator/health 에서 서버 구동상태 응답 가능
 
-1. application.properties에 local, dev, production 프로파일 작성
+2. application.properties에 local, dev, production 프로파일 작성👌
+    - 개인 서버에 MySQL 러닝 중, 'server.config.yml'
+    - 서버 계정 필요하면 ssh 풀어드릴테니 문의 ㄱㄱ
 
-1. 도메인 객체 작성	
+3. 도메인 객체 작성	
     - 도메인 로직 테스트 케이스 작성
     - 도메인 객체 작성
     
-1. repository 작성
+4. repository 작성
     - repository 인터페이스 작성
     - Optional로 작성
     - repository 테스트 작성
@@ -24,7 +26,7 @@ B/E 포폴 만들기 천천히 탑다운
       - @DataJpaTest
       - @SpringBootTest를 붙이지 않으면 Repository외의 다른 Bean은 @Autowired 불가
 
-1. 서비스 작성
+5. 서비스 작성
     - 서비스 인터페이스 작성
     - 서비스 테스트 작성
       - 테스트 클래스에 @Transactional 붙여줘야 메서드 별로 저장 후 rollback 적용됨
@@ -32,7 +34,7 @@ B/E 포폴 만들기 천천히 탑다운
       - @Transactional
       - 조회 메서드에도 @Transactional(readOnly = true)붙여줘야 JPA proxy 관련 오류 안 생김
       
-1. 컨트롤러 작성
+6. 컨트롤러 작성
     - 테스트는 service를 mocking 하는 방식 대신 통합테스트와 유사하게 작성
     
         ```java
@@ -41,30 +43,30 @@ B/E 포폴 만들기 천천히 탑다운
         ```
    - https://github.com/HomoEfficio/spring-web-api-test-stubber 활용 가능
    
-1. dto 작성
+7. dto 작성
     - 뷰에 맞는 dto 작성
     - 뷰에 맞는 validation 애노테이션 포함
     
-1. converter 작성
+8. converter 작성
     - converter 테스트 작성
     - http://modelmapper.org/ 활용 가능
     
-1. 컨트롤러에 dto 적용
+9. 컨트롤러에 dto 적용
     - 컨트롤러 메서드에 사용되던 도메인 객체를 dto로 변경
     
-1. 서비스에 dto-엔티티 매핑 적용
-    - 서비스 메서드의 파라미터로 사용되던 엔티티 객체를 dto로 변환
-    - dto <-> 엔티티 변환 후 repository 호출/결과 반환
+10. 서비스에 dto-엔티티 매핑 적용
+     - 서비스 메서드의 파라미터로 사용되던 엔티티 객체를 dto로 변환
+     - dto <-> 엔티티 변환 후 repository 호출/결과 반환
     
-1. 통합 테스트 실행
-    - Controller 테스트
+11. 통합 테스트 실행
+     - Controller 테스트
     
-1. Security 적용
-    - WebSecuityConfig 작성
-    - 컨트롤러에 권한 체크 추가
-    - 통합 테스트
-      - Security에 대한 테스트는 로그인이 포함된 모듈에서만 수행
-      - 나머지 모듈은 Security를 disable 하고 수행
+12. Security 적용
+     - WebSecuityConfig 작성
+     - 컨트롤러에 권한 체크 추가
+     - 통합 테스트
+       - Security에 대한 테스트는 로그인이 포함된 모듈에서만 수행
+       - 나머지 모듈은 Security를 disable 하고 수행
     
 
 1. Swagger 적용
