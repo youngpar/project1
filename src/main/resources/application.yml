@@ -16,11 +16,12 @@ spring:
       path : /db_test   # {server_ip:server_port}/db_test 접속해서 콘솔 사용 가능
 
   datasource:
-    url : jdbc:h2:mem:/~/project1/src/main/resources/devdb
-    #url: jdbc:h2:tcp://localhost/~/project1/src/main/resources/devdb  # 서버 구동시
+    #url: jdbc:h2:mem:/~/project1/src/main/resources/devdb
+    url: jdbc:h2:tcp://localhost/~/project1/src/main/resources/devdb  # 서버 구동시
     username: dev
     password:
     driver-class-name: org.h2.Driver
+    mapper-location: classpath:/mapper/*.xml
 
   jpa:
     hibernate:
@@ -29,6 +30,11 @@ spring:
       hibernate:
         format_sql: true
         show_sql: true  # Query 출력
+
+  #sql:
+  #  init:
+  #    mode: always
+  #    schema-locations: classpath:/schema/user.sql
 
 ---
 
@@ -43,4 +49,3 @@ spring:
     username: 'youngmon.dev'
     password: 'devpwd'
     driver-class-name: org.mysql.Driver
-

@@ -1,0 +1,8 @@
+{
+  "properties": [
+    {
+      "name": "spring.datasource.mapper-location",
+      "type": "java.lang.String",
+      "description": "Description for spring.datasource.mapper-location."
+  }
+] }
