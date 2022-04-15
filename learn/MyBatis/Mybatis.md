@@ -25,14 +25,33 @@
 		- artifactId: mybatis-spring-boot-starter
 		- version: x.x.x
 
-2. SqlSessionFactory 빌드
+2. Configuration
+	- 스프링에서 MyBatis 사용 시, 애플리케이션 컨텍스트에 SqlSessionFactory와 Mapper Instance 등록 필요
+	- SqlSessionFactory는 DataSource를 필요로 함
+	```java
+		@Configuration
+		public class BatisConfig {
+			@Bean
+			public SqlSessionFactory sqlSessionFactory() throws Exception {
+				SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
+				sqlSessionFactoryBean.setDataSource(dataSource());
+				return sqlSessionfactoryBean.getObject();
+		}
+	```
+	순서를 보면 SqlSessionFactoryBean 생성 -> DataSource 주입 -> 팩토리 객체 반환의 순서로 이루어짐
+
+	- Mapper
+		
+
+
+3. SqlSessionFactory 빌드
 	- 마이바티스 어플리케이션은 SqlSessionFactoryBuilder를 통해 SqlSessionFactory 인스턴스를 사용
 	- SqlSessionFactoryBuilder는 xml 설정파일을 읽어 팩토리 인스턴스를 빌드함
 	- xml 설정 파일에는 매퍼의 경로, 데이터 소스, 속성 등이 포함된다.
 	- Java 소스 코드에서는 바티스 config의 경로를 불러올 수 있으며, 클래스 패스를 통해 가져오거나, Resources라는 클래스를 통해 URL 스트림을 통해 클래스 패스 외부에서 자원을 로드할 수 있다.
 	- 또는 xml 구성 없이 Configuration 클래스를 통해 자바 소스코드로 설정 가능
 
-3. SqlSession Instatiation
+4. SqlSession Instatiation
 	- SqlSession이란 데이터 베이스에 연결하기 위한 세션으로 SQL Query를 실행하기 위해 필요한 모든 메소드를 가짐.
 	- 마이바티스 SQL 구문의 파라미터와 리턴값을 설명하는 인터페이스로 저장된 SQL을 실행하거나, SQL 직접 실행 가능
 	- 저장된 쿼리를 사용하면 오타, 문자열 처리, 타입 캐스팅에 대해 안전
@@ -58,7 +77,7 @@
 	>현재 마이바티스에서는 전체 경로를 표현하는 네임스페이스를 필수로 사용해야함.
 	>	>네임 스페이스로 자바 소스코드로 만들어진 인터페이스에 SQL을 바인딩해 사용 가능
 
-4. Java Source Code 계층에서 직접 쿼리
+5. Java Source Code 계층에서 직접 쿼리
 	- 복잡한 Query를 사용할 때는 xml에 저장해두고 호출해 사용하는 것이 유용할 수 있다.
 	- 단순하고 짧은 코드라면 xml에 작성할 필요 없이 어노테이션을 이용해 작성 가능
 	```java
@@ -68,7 +87,7 @@
 	}
 	```
 	
-5. Scope & LifeCycle
+6. Scope & LifeCycle
 	- 스프링 컨테이너로 의존성 주입을 통해, 세션, 매퍼 등을 주입해 Thread-safe 달성 가능
 	- DI 프레임워크를 통한 개발에서는 SessionFactory, FactoryBuilder에서는 일반 개발보다 생명 주기 관리가 덜 중요하나, 단순히 팩토리를 생성하는 용도의 팩토리 빌더는 유지되지 않도록 하는 것이 좋고, 세션을 생성하고 관리하는 세션팩토리는 static 싱글턴, 싱글턴 패턴으로 관리하는 것이 좋음
 	
@@ -87,3 +106,9 @@
 	- Mapper
 		- 매핑된 구문을 바인딩 하기 위해 만들어야 하는 인터페이스, SqlSession에서 getMapper() 메소드로 생성.
 		- Session과 같은 Scope(메서드 내부)에 두는 것이 좋으며, 사용 될 메서드가 호출되면 생성되고 끝나며, 명시적으로 닫을 필요는 없음
+
+<hr/>
+
+# In Spring
+
+
