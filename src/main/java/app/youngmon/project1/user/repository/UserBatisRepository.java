@@ -14,6 +14,6 @@ public class UserBatisRepository implements UserRepository, UserMapper{
 
     @Override
     public User findById(Long id) {
-        return ;
+        return null;
     }
 }

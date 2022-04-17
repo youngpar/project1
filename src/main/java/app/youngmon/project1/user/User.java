@@ -6,6 +6,8 @@ public class User {
     private String userPw;
     private UserDetail userDetail;
 
+    public User() {};
+
     public User(Long id, String userId, String userPw) {
         this.id = id;
         this.userId = userId;
