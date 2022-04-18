@@ -19,9 +19,14 @@ public class UserServiceTest {
     void 회원가입() {
         //  given
         User user = new User(1L, "youngseo21", "dudtj9910");
+        Long id = null;
 
         //  when
-        Long id = userService.join(user);
+        try {
+            id = userService.join(user);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         System.out.println(id);
         User find = userService.findById(1L);
 

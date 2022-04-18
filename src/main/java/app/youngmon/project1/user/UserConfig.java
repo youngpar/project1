@@ -2,6 +2,7 @@ package app.youngmon.project1.user;
 
 import app.youngmon.project1.user.repository.UserMemoryRepository;
 import app.youngmon.project1.user.repository.UserRepository;
+import app.youngmon.project1.user.repository.UserRepositoryV0;
 import app.youngmon.project1.user.service.UserService;
 import app.youngmon.project1.user.service.UserServiceImpl;
 import org.springframework.context.annotation.Bean;
@@ -16,6 +17,6 @@ public class UserConfig {
 
     @Bean
     public UserRepository userRepository() {
-        return new UserMemoryRepository();
+        return new UserRepositoryV0();
     }
 }

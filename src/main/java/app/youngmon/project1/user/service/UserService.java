@@ -2,6 +2,7 @@ package app.youngmon.project1.user.service;
 
 import app.youngmon.project1.user.User;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public interface UserService {
