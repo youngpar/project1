@@ -30,3 +30,8 @@
 		- 자원의 해제는 할당의 역순으로 진행되며, ResultSet, Statement, Connection의 순서로 해제
 		- 해제를 보장하기 위해 finally로 해제를 강제하며, 해제 도중 예외가 발생할 수 있어 각 해제 단계를 try-catch로 각각 예외 처리
 	
+	- ResultSet 인터페이스는 Query의 레코드 셋을 저장하는 가상 테이블로 테이블 내부의 Row에 접근하기 위한 커서를 가짐
+	> next() 메소드로 행을 이동하며, JDBC 1.0과 2.0의 차이가 있는데 JDBC 2.0에서는 ResultSet이 세션을 가지고 Lazy-Loading이 가능
+	- ResultSet의 첫 값은 Null, next로 커서를 이동하며 레코드가 존재할 시 true, 아닐 시 false 반환
+	- get{Type}(ColumnName) 메서드를 통해 커서가 위치한 레코드의 필드의 값을 추출할 수 있음
+
