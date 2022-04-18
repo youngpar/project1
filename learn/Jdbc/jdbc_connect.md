@@ -16,15 +16,15 @@
 	- 반환된 Connection 객체는 Query 바인딩을 위해 String 타입의 SQL을 받아 PreparedStatement객체 반환.
 	- PreparedStatement는 Set{Type}(idx, value) 메소드로 String 형태의 문자열에 값을 매핑해 사용 가능
 		- String + $value + String과 같은 Statement가 아닌 파라미터 바인딩을 통해 SQL Injection 방지
-		**Statement, PreparedStatement 차이**
-		- Statement: 단일 사용 시 빠른 수행 시간 보장, 쿼리에 인자 부여 불가, 매 번 쿼리에 대한 컴파일 수행
-		- PreparedStatement: 쿼리에 Param 바인딩 가능, 처음 프리컴파일 이후 컴파일 수행 X, 반복 사용 시 Statement보다 빠름
+		> ####Statement, PreparedStatement 차이
+		> - Statement: 단일 사용 시 빠른 수행 시간 보장, 쿼리에 인자 부여 불가, 매 번 쿼리에 대한 컴파일 수행
+		> - PreparedStatement: 쿼리에 Param 바인딩 가능, 처음 프리컴파일 이후 컴파일 수행 X, 반복 사용 시 Statement보다 빠름
 
 	- PreparedStatement의 execute, executeUpdate, executeQuery 함수를 통해 데이터 변경(DML) 수행
-		**execute, executeUpdate, executeQuery 차이**
-		- execute: 수행 결과로 Boolean 타입의 값을 반환, 수행 결과가 ResultSet일 시 true, 아닐 시 false 반환. 모든 구문 수행 가능
-		- executeUpdate: 수행 결과로 int 값 반환, SELECT를 제외한 다른 구문을 수행할 때 사용하며, 쿼리가 적용 된 행의 수를 반환, CREATE/DROP 구문에서는 -1을 반환
-		- executeQuery: 수행 결과로 ResultSet을 반환, SELECT 수행에 사용
+		> ####execute, executeUpdate, executeQuery 차이
+		> - execute: 수행 결과로 Boolean 타입의 값을 반환, 수행 결과가 ResultSet일 시 true, 아닐 시 false 반환. 모든 구문 수행 가능
+		> - executeUpdate: 수행 결과로 int 값 반환, SELECT를 제외한 다른 구문을 수행할 때 사용하며, 쿼리가 적용 된 행의 수를 반환, CREATE/DROP 구문에서는 -1을 반환
+		> - executeQuery: 수행 결과로 ResultSet을 반환, SELECT 수행에 사용
 
 	- Query의 수행 이후에는 반환된 ResultSet, int, boolean 등이 반환되며 수행 이후 Connection 해제가 필수(Resource Leaks 방지)
 		- 자원의 해제는 할당의 역순으로 진행되며, ResultSet, Statement, Connection의 순서로 해제
